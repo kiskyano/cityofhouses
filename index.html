@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>City of Houses | Maryland Real Estate & Dominican Republic Property</title>
+<meta name="description" content="Licensed REALTOR® in Maryland serving buyers, sellers, and DR property investors. Juan S. Mercedes — your trusted bridge to Caribbean real estate.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: #f4f4f2; color: #1a1a1a; }
+
+  /* LANGUAGE OVERLAY */
+  .lang-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(4,28,53,0.95);
+    display: flex; align-items: center; justify-content: center;
+    z-index: 1000;
+  }
+  .lang-box {
+    background: #fff; border-radius: 16px;
+    padding: 2.5rem 3rem; text-align: center;
+    max-width: 360px; width: 90%;
+  }
+  .lang-box h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px; font-weight: 400;
+    color: #042C53; margin-bottom: 0.5rem;
+  }
+  .lang-box p { font-size: 14px; color: #666; margin-bottom: 2rem; }
+  .lang-btns { display: flex; gap: 12px; justify-content: center; }
+  .lang-btn {
+    padding: 12px 32px; border-radius: 8px;
+    font-size: 15px; font-weight: 500; cursor: pointer;
+    border: 1.5px solid #ddd; background: #f9f9f9;
+    color: #1a1a1a; font-family: 'DM Sans', sans-serif;
+    transition: all 0.15s;
+  }
+  .lang-btn.primary { background: #042C53; color: #fff; border-color: #042C53; }
+  .lang-btn:hover { opacity: 0.85; }
+
+  /* SITE */
+  .site { display: none; }
+  .site.visible { display: block; }
+
+  /* NAV */
+  nav {
+    background: #042C53; padding: 1rem 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; color: #E6F1FB; font-weight: 400;
+  }
+  .nav-links { display: flex; gap: 1.5rem; }
+  .nav-links a {
+    color: #85B7EB; font-size: 14px; text-decoration: none;
+    font-weight: 500; transition: color 0.15s;
+  }
+  .nav-links a:hover { color: #FAC775; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(150deg, #042C53 55%, #185FA5 100%);
+    padding: 5rem 2rem 4rem; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute;
+    top: -80px; right: -80px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: rgba(239,159,39,0.08);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: rgba(239,159,39,0.15);
+    color: #FAC775; font-size: 11px;
+    font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 5px 16px; border-radius: 20px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(28px, 5vw, 46px);
+    font-weight: 400; color: #E6F1FB;
+    line-height: 1.25; margin-bottom: 1rem;
+    max-width: 600px; margin-left: auto; margin-right: auto;
+  }
+  .hero h1 span { color: #FAC775; }
+  .hero-sub {
+    font-size: 16px; color: #85B7EB;
+    max-width: 500px; margin: 0 auto 2.5rem;
+    line-height: 1.7;
+  }
+  .hero-cta {
+    display: inline-block;
+    background: #EF9F27; color: #042C53;
+    padding: 14px 32px; border-radius: 8px;
+    font-size: 15px; font-weight: 500;
+    text-decoration: none; margin-bottom: 2.5rem;
+    transition: opacity 0.15s;
+  }
+  .hero-cta:hover { opacity: 0.9; }
+  .hero-badges {
+    display: flex; gap: 10px;
+    flex-wrap: wrap; justify-content: center;
+  }
+  .hero-badge {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #B5D4F4; font-size: 12px;
+    padding: 6px 14px; border-radius: 20px;
+  }
+
+  /* SECTIONS */
+  .section { padding: 4rem 2rem; max-width: 960px; margin: 0 auto; }
+  .section-label {
+    font-size: 11px; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    color: #888; margin-bottom: 1.5rem;
+  }
+
+  /* SERVICES */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .service-card {
+    background: #fff; border: 1px solid #e8e8e6;
+    border-radius: 12px; padding: 1.5rem;
+  }
+  .service-icon { font-size: 28px; margin-bottom: 12px; }
+  .service-card h3 { font-size: 16px; font-weight: 500; margin-bottom: 8px; color: #042C53; }
+  .service-card p { font-size: 14px; color: #666; line-height: 1.6; }
+
+  /* ARTICLES */
+  .article-card {
+    background: #fff; border: 1px solid #e8e8e6;
+    border-radius: 12px; padding: 1.25rem 1.5rem;
+    margin-bottom: 12px; display: flex;
+    align-items: flex-start; gap: 1rem;
+    text-decoration: none; color: inherit;
+    transition: border-color 0.15s;
+  }
+  .article-card:hover { border-color: #185FA5; }
+  .article-tag {
+    font-size: 10px; font-weight: 500;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    padding: 3px 10px; border-radius: 4px;
+    white-space: nowrap; flex-shrink: 0;
+  }
+  .tag-dr { background: #E6F1FB; color: #185FA5; }
+  .tag-md { background: #EAF3DE; color: #3B6D11; }
+  .article-title { font-size: 15px; font-weight: 500; margin-bottom: 4px; line-height: 1.4; }
+  .article-meta { font-size: 12px; color: #888; }
+
+  /* ABOUT */
+  .about-card {
+    background: #fff; border: 1px solid #e8e8e6;
+    border-radius: 12px; padding: 2rem;
+    display: flex; gap: 1.5rem; align-items: flex-start;
+  }
+  .avatar {
+    width: 60px; height: 60px; border-radius: 50%;
+    background: #042C53; color: #E6F1FB;
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; display: flex;
+    align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .about-name { font-size: 18px; font-weight: 500; margin-bottom: 4px; }
+  .about-title { font-size: 13px; color: #888; margin-bottom: 12px; }
+  .about-bio { font-size: 14px; color: #555; line-height: 1.7; }
+
+  /* CONTACT */
+  .contact-row { display: flex; gap: 10px; flex-wrap: wrap; }
+  .contact-pill {
+    display: flex; align-items: center; gap: 8px;
+    background: #fff; border: 1px solid #e8e8e6;
+    border-radius: 20px; padding: 8px 16px;
+    font-size: 13px; color: #042C53; text-decoration: none;
+    transition: border-color 0.15s;
+  }
+  .contact-pill:hover { border-color: #185FA5; }
+  .contact-pill span { font-size: 16px; }
+
+  /* FOOTER */
+  footer {
+    background: #042C53; color: #85B7EB;
+    text-align: center; padding: 2rem;
+    font-size: 12px; line-height: 1.8;
+  }
+  footer strong { color: #E6F1FB; }
+
+  @media (max-width: 600px) {
+    .about-card { flex-direction: column; }
+    nav { padding: 1rem; }
+    .nav-links { gap: 1rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LANGUAGE OVERLAY -->
+<div class="lang-overlay" id="langOverlay">
+  <div class="lang-box">
+    <h2>City of Houses</h2>
+    <p>Select your preferred language<br>Selecciona tu idioma</p>
+    <div class="lang-btns">
+      <button class="lang-btn primary" onclick="setLang('en')">English</button>
+      <button class="lang-btn" onclick="setLang('es')">Español</button>
+    </div>
+  </div>
+</div>
+
+<!-- SITE CONTENT -->
+<div class="site" id="site">
+
+  <nav>
+    <div class="nav-brand">City of Houses</div>
+    <div class="nav-links">
+      <a href="#services" id="nav-services">Services</a>
+      <a href="#articles" id="nav-articles">Articles</a>
+      <a href="#about" id="nav-about">About</a>
+      <a href="#contact" id="nav-contact">Contact</a>
+    </div>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-tag" id="hero-tag">Maryland · Dominican Republic</div>
+    <h1 id="hero-h1">Your trusted bridge to <span>Caribbean real estate</span></h1>
+    <p class="hero-sub" id="hero-sub">Licensed in Maryland. Rooted in the Dominican Republic. Helping Americans buy property in DR — and helping DR nationals find home in the US.</p>
+    <a href="#contact" class="hero-cta" id="hero-cta">Get started</a>
+    <div class="hero-badges">
+      <span class="hero-badge" id="badge1">✓ MD Licensed REALTOR®</span>
+      <span class="hero-badge" id="badge2">✓ Bilingual EN/ES</span>
+      <span class="hero-badge" id="badge3">✓ DR Market Specialist</span>
+    </div>
+  </div>
+
+  <div class="section" id="services">
+    <p class="section-label" id="services-label">What I help with</p>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-icon">🌴</div>
+        <h3 id="s1-title">DR Property Investment</h3>
+        <p id="s1-desc">Condos, villas, and land in Punta Cana, Las Terrenas, Santo Domingo and beyond. Vetted developers, trusted agents, US-side accountability.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🏡</div>
+        <h3 id="s2-title">Maryland Real Estate</h3>
+        <p id="s2-desc">Buying, selling, and renting in the Columbia, MD area and surrounding communities. Licensed and active in Maryland.</p>
+      </div>
+      <div class="service-card">
+        <div class="service-icon">🤝</div>
+        <h3 id="s3-title">Trust Bridge Services</h3>
+        <p id="s3-desc">Connecting American buyers with vetted DR developers, attorneys, and agents. I speak both languages — literally and culturally.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#fff; padding: 0;">
+  <div class="section" id="articles">
+    <p class="section-label" id="articles-label">Latest articles</p>
+    <a href="#" class="article-card">
+      <span class="article-tag tag-dr">DR Market</span>
+      <div>
+        <p class="article-title" id="a1-title">Why Americans Are Buying Property in the Dominican Republic</p>
+        <p class="article-meta">Juan S. Mercedes · June 2026</p>
+      </div>
+    </a>
+    <a href="#" class="article-card">
+      <span class="article-tag tag-md">Maryland</span>
+      <div>
+        <p class="article-title" id="a2-title">Coming soon: What First-Time Buyers Need to Know in MD</p>
+        <p class="article-meta">Juan S. Mercedes · Coming soon</p>
+      </div>
+    </a>
+  </div>
+  </div>
+
+  <div class="section" id="about">
+    <p class="section-label" id="about-label">About</p>
+    <div class="about-card">
+      <div class="avatar">JSM</div>
+      <div>
+        <p class="about-name">Juan S. Mercedes</p>
+        <p class="about-title" id="about-title">Licensed REALTOR® | Maryland · DR Market Specialist</p>
+        <p class="about-bio" id="about-bio">I'm a licensed real estate agent in Maryland with deep personal and professional ties to the Dominican Republic. I speak English and Spanish fluently, and I serve as a trusted bridge between American investors and the DR property market — bringing US-side accountability to Caribbean opportunities.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="background:#fff; padding: 0;">
+  <div class="section" id="contact">
+    <p class="section-label" id="contact-label">Get in touch</p>
+    <div class="contact-row">
+      <a href="mailto:juan@cityofhouses.com" class="contact-pill"><span>✉️</span> juan@cityofhouses.com</a>
+      <a href="https://facebook.com/cityofhouses" class="contact-pill" target="_blank"><span>📘</span> City of Houses</a>
+      <a href="https://instagram.com/cityofhouses" class="contact-pill" target="_blank"><span>📸</span> @cityofhouses</a>
+    </div>
+  </div>
+  </div>
+
+  <footer>
+    <strong>City of Houses</strong> · Juan S. Mercedes<br>
+    <span id="footer-text">Licensed REALTOR® in Maryland · Not licensed in DC or Virginia<br>
+    © 2026 City of Houses. All rights reserved.</span>
+  </footer>
+
+</div>
+
+<script>
+  const copy = {
+    en: {
+      heroTag: 'Maryland · Dominican Republic',
+      heroH1: 'Your trusted bridge to <span style="color:#FAC775">Caribbean real estate</span>',
+      heroSub: 'Licensed in Maryland. Rooted in the Dominican Republic. Helping Americans buy property in DR — and helping DR nationals find home in the US.',
+      heroCta: 'Get started',
+      badge1: '✓ MD Licensed REALTOR®',
+      badge2: '✓ Bilingual EN/ES',
+      badge3: '✓ DR Market Specialist',
+      navServices: 'Services', navArticles: 'Articles', navAbout: 'About', navContact: 'Contact',
+      servicesLabel: 'What I help with',
+      s1Title: 'DR Property Investment',
+      s1Desc: 'Condos, villas, and land in Punta Cana, Las Terrenas, Santo Domingo and beyond. Vetted developers, trusted agents, US-side accountability.',
+      s2Title: 'Maryland Real Estate',
+      s2Desc: 'Buying, selling, and renting in the Columbia, MD area and surrounding communities. Licensed and active in Maryland.',
+      s3Title: 'Trust Bridge Services',
+      s3Desc: "Connecting American buyers with vetted DR developers, attorneys, and agents. I speak both languages — literally and culturally.",
+      articlesLabel: 'Latest articles',
+      a1Title: 'Why Americans Are Buying Property in the Dominican Republic',
+      a2Title: 'Coming soon: What First-Time Buyers Need to Know in MD',
+      aboutLabel: 'About',
+      aboutTitle: 'Licensed REALTOR® | Maryland · DR Market Specialist',
+      aboutBio: "I'm a licensed real estate agent in Maryland with deep personal and professional ties to the Dominican Republic. I speak English and Spanish fluently, and I serve as a trusted bridge between American investors and the DR property market — bringing US-side accountability to Caribbean opportunities.",
+      contactLabel: 'Get in touch',
+      footerText: 'Licensed REALTOR® in Maryland · Not licensed in DC or Virginia<br>© 2026 City of Houses. All rights reserved.'
+    },
+    es: {
+      heroTag: 'Maryland · República Dominicana',
+      heroH1: 'Tu puente de confianza para <span style="color:#FAC775">comprar propiedades en el Caribe</span>',
+      heroSub: 'Con licencia en Maryland. Con raíces en la República Dominicana. Ayudo a estadounidenses a comprar propiedades en RD — y a dominicanos a encontrar su hogar en EE.UU.',
+      heroCta: 'Contáctame',
+      badge1: '✓ Agente inmobiliario con licencia en MD',
+      badge2: '✓ Bilingüe EN/ES',
+      badge3: '✓ Especialista en el mercado de RD',
+      navServices: 'Servicios', navArticles: 'Artículos', navAbout: 'Sobre mí', navContact: 'Contacto',
+      servicesLabel: 'Cómo puedo ayudarte',
+      s1Title: 'Inversión en propiedades en RD',
+      s1Desc: 'Apartamentos, villas y terrenos en Punta Cana, Las Terrenas, Santo Domingo y más. Desarrolladores verificados, agentes de confianza.',
+      s2Title: 'Propiedades en Maryland',
+      s2Desc: 'Compra, venta y alquiler en el área de Columbia, MD y comunidades cercanas. Con licencia activa en Maryland.',
+      s3Title: 'Servicio de puente de confianza',
+      s3Desc: 'Conecto compradores americanos con desarrolladores, abogados y agentes verificados en RD. Hablo ambos idiomas — literal y culturalmente.',
+      articlesLabel: 'Artículos recientes',
+      a1Title: 'Por qué los estadounidenses están comprando propiedades en República Dominicana',
+      a2Title: 'Próximamente: Lo que deben saber los compradores por primera vez en MD',
+      aboutLabel: 'Sobre mí',
+      aboutTitle: 'Agente inmobiliario con licencia | Maryland · Especialista en RD',
+      aboutBio: 'Soy agente inmobiliario con licencia en Maryland y tengo raíces profundas en la República Dominicana. Hablo inglés y español con fluidez, y sirvo como puente de confianza entre inversores americanos y el mercado inmobiliario dominicano.',
+      contactLabel: 'Contáctame',
+      footerText: 'Agente inmobiliario con licencia en Maryland · Sin licencia en DC o Virginia<br>© 2026 City of Houses. Todos los derechos reservados.'
+    }
+  };
+
+  function setLang(lang) {
+    const t = copy[lang];
+    document.getElementById('langOverlay').style.display = 'none';
+    document.getElementById('site').classList.add('visible');
+    document.getElementById('hero-tag').textContent = t.heroTag;
+    document.getElementById('hero-h1').innerHTML = t.heroH1;
+    document.getElementById('hero-sub').textContent = t.heroSub;
+    document.getElementById('hero-cta').textContent = t.heroCta;
+    document.getElementById('badge1').textContent = t.badge1;
+    document.getElementById('badge2').textContent = t.badge2;
+    document.getElementById('badge3').textContent = t.badge3;
+    document.getElementById('nav-services').textContent = t.navServices;
+    document.getElementById('nav-articles').textContent = t.navArticles;
+    document.getElementById('nav-about').textContent = t.navAbout;
+    document.getElementById('nav-contact').textContent = t.navContact;
+    document.getElementById('services-label').textContent = t.servicesLabel;
+    document.getElementById('s1-title').textContent = t.s1Title;
+    document.getElementById('s1-desc').textContent = t.s1Desc;
+    document.getElementById('s2-title').textContent = t.s2Title;
+    document.getElementById('s2-desc').textContent = t.s2Desc;
+    document.getElementById('s3-title').textContent = t.s3Title;
+    document.getElementById('s3-desc').textContent = t.s3Desc;
+    document.getElementById('articles-label').textContent = t.articlesLabel;
+    document.getElementById('a1-title').textContent = t.a1Title;
+    document.getElementById('a2-title').textContent = t.a2Title;
+    document.getElementById('about-label').textContent = t.aboutLabel;
+    document.getElementById('about-title').textContent = t.aboutTitle;
+    document.getElementById('about-bio').textContent = t.aboutBio;
+    document.getElementById('contact-label').textContent = t.contactLabel;
+    document.getElementById('footer-text').innerHTML = t.footerText;
+    localStorage.setItem('coh-lang', lang);
+  }
+
+  const saved = localStorage.getItem('coh-lang');
+  if (saved) setLang(saved);
+</script>
+</body>
+</html>
